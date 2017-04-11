@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SimpleSubstitutionTabController">
+   <children>
+      <SplitPane dividerPositions="0.5" focusTraversable="true" layoutX="14.0" layoutY="107.0" prefHeight="323.0" prefWidth="796.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="284.0" prefWidth="348.0">
+               <children>
+                  <TextArea id="inputTextArea" fx:id="tab3_inputTextArea" prefHeight="284.0" prefWidth="393.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TextArea id="tab2_outputTextArea" fx:id="tab3_outputTextArea" prefHeight="284.0" prefWidth="395.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <TextField id="tab2_key" fx:id="tab3_keyTextField" layoutX="251.0" layoutY="57.0" prefHeight="26.0" prefWidth="269.0" />
+      <Label layoutX="181.0" layoutY="62.0" prefWidth="72.0" text="Ключ" />
+      <Button id="tab2_decreptButton" fx:id="tab3_decryptButton" layoutX="538.0" layoutY="57.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
+      <Label layoutX="181.0" layoutY="30.0" prefWidth="86.0" text="Алфавіт" />
+      <TextField id="tab2_alphabet" fx:id="tab3_alphabetTextField" layoutX="251.0" layoutY="25.0" prefHeight="26.0" prefWidth="269.0" />
+   </children>
+</AnchorPane>

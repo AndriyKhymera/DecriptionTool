@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <RadioButton fx:id="oneSymbolRadioButton" layoutX="31.0" layoutY="14.0" mnemonicParsing="false" onAction="#radioButtonPressed" prefWidth="87.0" selected="false" text="1 Символ">
+         <toggleGroup>
+            <ToggleGroup fx:id="toggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="twoSymbolsRadioButton" layoutX="151.0" layoutY="14.0" mnemonicParsing="false" onAction="#radioButtonPressed" text="Біграми" toggleGroup="$toggleGroup" />
+      <RadioButton fx:id="threeSymbolsRadioButton" layoutX="275.0" layoutY="14.0" mnemonicParsing="false" onAction="#radioButtonPressed" selected="false" text="Триграми" toggleGroup="$toggleGroup" />
+      <BarChart fx:id="barChart" cache="false" prefHeight="374.0" prefWidth="376.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0">
+         <xAxis>
+            <CategoryAxis fx:id="symbols" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="frequency" side="LEFT" />
+         </yAxis>
+      </BarChart>
+      <Button fx:id="newBarChartWindowButton" layoutX="143.0" layoutY="48.0" mnemonicParsing="false" onAction="#barChartNewWindowHandler" text="Відкити в новому вікні" />
+   </children>
+</AnchorPane>

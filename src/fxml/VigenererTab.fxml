@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="461.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VigenereController">
+  <children>
+    <Label layoutX="216.0" layoutY="70.0" prefWidth="72.0" text="Ключ" />
+    <TextField id="tab2_key" fx:id="tab4_keyTextField" layoutX="316.0" layoutY="70.0" prefWidth="237.0" />
+    <SplitPane dividerPositions="0.5" focusTraversable="true" layoutX="14.0" layoutY="122.0" prefHeight="323.0" prefWidth="796.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="284.0" prefWidth="348.0">
+          <children>
+            <TextArea id="inputTextArea" fx:id="tab4_inputTextArea" prefHeight="284.0" prefWidth="393.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <children>
+            <TextArea id="tab2_outputTextArea" fx:id="tab4_outputTextArea" prefHeight="284.0" prefWidth="395.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+    <Button id="tab2_decreptButton" fx:id="tab4_decryptButton" layoutX="595.0" layoutY="33.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
+    <Button fx:id="tab4_encryptButton" layoutX="595.0" layoutY="70.0" mnemonicParsing="false" onAction="#encryptButtonHandler" text="Зашифрувати" />
+      <Button fx:id="tab4_graphicsButton" layoutX="77.0" layoutY="70.0" mnemonicParsing="false" onAction="#graphicsButtonHandler" text="Графіки" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BarChartWindowController">
+   <children>
+      <BarChart fx:id="barChart" layoutX="57.0" layoutY="74.0" prefHeight="326.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="74.0">
+        <xAxis>
+          <CategoryAxis fx:id="symbols" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="frequency" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <RadioButton fx:id="threeSymbolsRadioButton" layoutX="285.0" layoutY="24.0" mnemonicParsing="false" onAction="#radioButtonPressed" selected="false" text="Триграми">
+         <toggleGroup>
+            <ToggleGroup fx:id="toggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="twoSymbolsRadioButton" layoutX="161.0" layoutY="24.0" mnemonicParsing="false" onAction="#radioButtonPressed" text="Біграми" toggleGroup="$toggleGroup" />
+      <RadioButton fx:id="oneSymbolRadioButton" layoutX="41.0" layoutY="24.0" mnemonicParsing="false" onAction="#radioButtonPressed" prefWidth="87.0" selected="true" text="1 Символ" toggleGroup="$toggleGroup" />
+      <CheckBox fx:id="sortByFrequencyCheckBox" layoutX="395.0" layoutY="25.0" mnemonicParsing="false" onAction="#sortByFrequencyCheckBoxStateChanged" text="Сортувати по частоті" />
+      <TextField fx:id="frequencyBottomTextField" layoutX="593.0" layoutY="22.0" prefHeight="25.0" prefWidth="55.0" />
+      <Label layoutX="662.0" layoutY="26.0" text="Мінімум частот" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="tab2_mainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="461.0" prefWidth="824.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controllers.CaesarController">
+  <children>
+    <TextField id="tab2_alphabet" fx:id="tab2_alphabetTextField" layoutX="316.0" layoutY="37.0" prefWidth="237.0" />
+    <Label layoutX="216.0" layoutY="40.0" prefWidth="86.0" text="Алфавіт" />
+    <Label layoutX="216.0" layoutY="72.0" prefWidth="72.0" text="Ключ" />
+    <TextField id="tab2_key" fx:id="tab2_keyTextField" layoutX="316.0" layoutY="72.0" prefWidth="86.0" />
+    <SplitPane dividerPositions="0.5" focusTraversable="true" prefHeight="323.0" prefWidth="796.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="124.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="284.0" prefWidth="348.0">
+          <children>
+            <TextArea id="inputTextArea" fx:id="tab2_inputTextArea" prefHeight="284.0" prefWidth="393.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <children>
+            <TextArea fx:id="tab2_outputTextArea" prefHeight="284.0" prefWidth="395.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+    <Button id="tab2_decreptButton" fx:id="decryptButton" layoutX="455.0" layoutY="72.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
+  </children>
+</AnchorPane>
