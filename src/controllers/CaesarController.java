@@ -3,6 +3,7 @@ package controllers;
 import entity.Statistic;
 import entity.Utils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -41,7 +42,16 @@ public class CaesarController {
         tab2_alphabetTextField.setText(statistic.getAlphabet());
 
         String inputText = tab2_inputTextArea.getText();
-        int shift = Integer.parseInt(tab2_keyTextField.getText());
+        Integer shift = 0;
+        try {
+            shift = Integer.parseInt(tab2_keyTextField.getText());
+        }catch (NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Eror");
+            alert.setContentText("Ooops, you forgor to enter the key.");
+            alert.showAndWait();
+        }
 
         String outputText = decryptCaesar(inputText, shift);
         tab2_outputTextArea.setText(outputText);

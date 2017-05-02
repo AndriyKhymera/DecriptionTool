@@ -3,6 +3,7 @@ package controllers;
 import entity.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -51,7 +52,16 @@ public class SimpleSubstitutionTabController implements Initializable {
         for (int i = 0; i < text.length();i++){
             newIndex = key.indexOf(text.charAt(i));
             System.out.println(text.charAt(i));
-            decryptedText.append(alphabet.charAt(newIndex));
+            try {
+                decryptedText.append(key.charAt(newIndex));
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Eror");
+                alert.setContentText("Ooops, there is no " + text.charAt(i) + "in the key.");
+                alert.showAndWait();
+                break;
+            }
         }
 
         tab3_outputTextArea.setText(decryptedText.toString());
