@@ -8,8 +8,8 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="461.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VigenereController">
   <children>
-    <Label layoutX="216.0" layoutY="70.0" prefWidth="72.0" text="Ключ" />
-    <TextField id="tab2_key" fx:id="tab4_keyTextField" layoutX="316.0" layoutY="70.0" prefWidth="237.0" />
+    <Label layoutX="222.0" layoutY="51.0" prefWidth="72.0" text="Ключ" />
+    <TextField id="tab2_key" fx:id="tab4_keyTextField" layoutX="294.0" layoutY="46.0" prefWidth="237.0" />
     <SplitPane dividerPositions="0.5" focusTraversable="true" layoutX="14.0" layoutY="122.0" prefHeight="323.0" prefWidth="796.0">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="284.0" prefWidth="348.0">
@@ -24,8 +24,8 @@
         </AnchorPane>
       </items>
     </SplitPane>
-    <Button id="tab2_decreptButton" fx:id="tab4_decryptButton" layoutX="595.0" layoutY="33.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
-    <Button fx:id="tab4_encryptButton" layoutX="595.0" layoutY="70.0" mnemonicParsing="false" onAction="#encryptButtonHandler" text="Зашифрувати" />
-      <Button fx:id="tab4_graphicsButton" layoutX="77.0" layoutY="70.0" mnemonicParsing="false" onAction="#graphicsButtonHandler" text="Графіки" />
+    <Button id="tab2_decreptButton" fx:id="tab4_decryptButton" layoutX="592.0" layoutY="21.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
+    <Button fx:id="tab4_encryptButton" layoutX="595.0" layoutY="71.0" mnemonicParsing="false" onAction="#encryptButtonHandler" text="Зашифрувати" />
+      <Button fx:id="tab4_graphicsButton" layoutX="111.0" layoutY="46.0" mnemonicParsing="false" onAction="#graphicsButtonHandler" text="Графіки" />
   </children>
 </AnchorPane>

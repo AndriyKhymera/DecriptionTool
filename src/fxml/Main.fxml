@@ -29,6 +29,11 @@
             <fx:include source="VigenererTab.fxml" />
           </content>
         </Tab>
+            <Tab text="Шифр Хілла">
+               <content>
+                  <fx:include source="HillTab.fxml" />
+               </content>
+            </Tab>
       </tabs>
     </TabPane>
   </children>
