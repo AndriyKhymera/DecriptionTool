@@ -1,5 +1,7 @@
 package entity;
 
+import javafx.scene.control.Alert;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -87,5 +89,9 @@ public class Utils {
         return  result;
     }
 
-
+    public static void showError(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

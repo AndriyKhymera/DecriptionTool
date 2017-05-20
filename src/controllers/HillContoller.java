@@ -1,15 +1,28 @@
 package controllers;
 
+import entity.Statistic;
+import entity.Utils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.ResourceBundle;
 
 /**
  * Created by andrii on 02.05.17.
  */
-public class HillContoller {
+public class HillContoller implements Initializable{
 
     @FXML
     public TextField tab5_keyTextField;
@@ -24,9 +37,19 @@ public class HillContoller {
     @FXML
     public Button tab5_decryptButton;
 
-
-    private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,:;\"'-";
+    private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,;'-";
     private int[][] keyMatrix;
+    private int[][] invertedKeyMatrix;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tab5_keyTextField.setText("ANDRIIKHY");
+        try {
+            tab5_inputTextArea.setText(Utils.loadTextFromFile("/media/andrii/Новый том/Навчання/Курс 3/Семестр 2/Lab1_4/src/resources/Caesar_decryptedText"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void checkTheKeyButtonHandler(){
@@ -34,90 +57,17 @@ public class HillContoller {
     }
 
     @FXML
-    public void decryptButtonHandler(){
-        boolean isKeyCorrect = checkTheKey();
+    public void lineChartsButtonHandler()throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/GraphicsWindowl.fxml"));
+        Parent root = root = fxmlLoader.load();
 
-        if (!isKeyCorrect){
-            showError("Key isn't correct!");
-        }else {
-            tab5_outputTextArea.clear();
-        }
+        GraphicsWindowController newWindow = fxmlLoader.<GraphicsWindowController>getController();
+        newWindow.setDectyptedTextStatistic(Statistic.findFrequency(tab5_inputTextArea.getText(), 1));
+        newWindow.setEncryptedTextStatistic(Statistic.findFrequency(tab5_outputTextArea.getText(), 1));
 
-        if (tab5_inputTextArea.getText() == ""){
-            showError("Please enter text to decrypt");
-        }
-
-        String text = tab5_inputTextArea.getText();
-
-        String dectyptedText = decrypt(text);
-
-        tab5_outputTextArea.setText(dectyptedText);
-    }
-
-    @FXML
-    public void encryptButtonHandler(){
-        boolean isKeyCorrect = checkTheKey();
-
-        if (!isKeyCorrect){
-            showError("Key isn't correct!");
-        }else {
-            tab5_outputTextArea.clear();
-        }
-
-        if (tab5_inputTextArea.getText() == ""){
-            showError("Please enter text to encrypt");
-        }
-
-        String text = tab5_inputTextArea.getText();
-
-        String enctyptedText = encrypt(text);
-
-        tab5_outputTextArea.setText(enctyptedText);
-    }
-
-    public String decrypt(String text){
-        int s = keyMatrix.length;
-        return devide(text, s);
-    }
-
-    private String devide(String text, int s) {
-        StringBuilder stringBuilder = new StringBuilder();
-        while (text.length() > s)
-        {
-            String sub = text.substring(0, s);
-            text = text.substring(s, text.length());
-            stringBuilder.append(perform(sub));
-        }
-        if (text.length() == s)
-            stringBuilder.append(perform(text));
-        else if (text.length() < s)
-        {
-            for (int i = text.length(); i < s; i++)
-                text = text + 'x';
-            stringBuilder.append(perform(text));
-        }
-
-        return stringBuilder.toString();
-    }
-
-    public String encrypt(String text){
-        int s = keyMatrix.length;
-        //TODO change keyMatrix to ^(-1)
-        return devide(text, s);
-    }
-    public int[][] keyToMatrix(String key, int len)
-    {
-        int[][] keyMatrix = new int[len][len];
-        int c = 0;
-        for (int i = 0; i < len; i++)
-        {
-            for (int j = 0; j < len; j++)
-            {
-                keyMatrix[i][j] = ((int) key.charAt(c)) - 97;
-                c++;
-            }
-        }
-        return keyMatrix;
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public boolean checkTheKey(){
@@ -147,11 +97,110 @@ public class HillContoller {
             tab5_outputTextArea.appendText("\n\nKey is correct.");
         }
 
+        invertedKeyMatrix = calcInvertedMatrix(keyMatrix);
+
+        tab5_outputTextArea.appendText("\nInverted matrix:\n");
+        tab5_outputTextArea.appendText(prettyArray(invertedKeyMatrix));
+
         return true;
     }
 
-    public int determinant(int A[][], int N)
-    {
+    @FXML
+    public void decryptButtonHandler(){
+        boolean isKeyCorrect = checkTheKey();
+
+        if (!isKeyCorrect){
+            Utils.showError("Key isn't correct!");
+            return;
+        }else {
+            tab5_outputTextArea.clear();
+        }
+
+        if (tab5_inputTextArea.getText().equals("")){
+            Utils.showError("Please enter text to decrypt");
+            return;
+        }
+
+        String text = tab5_inputTextArea.getText();
+
+        String dectyptedText = decrypt(text);
+
+        tab5_outputTextArea.setText(dectyptedText);
+    }
+
+    @FXML
+    public void encryptButtonHandler(){
+        boolean isKeyCorrect = checkTheKey();
+
+        if (!isKeyCorrect){
+            Utils.showError("Key isn't correct!");
+            return;
+        }else {
+            tab5_outputTextArea.clear();
+        }
+
+        if (tab5_inputTextArea.getText().equals("")){
+            Utils.showError("Please enter text to encrypt");
+            return ;
+        }
+
+        String text = tab5_inputTextArea.getText();
+
+        String encryptedText = encrypt(text);
+
+        tab5_outputTextArea.setText(encryptedText);
+    }
+
+    public String decrypt(String text){
+        String[] subStrings = devide(text);
+        String[] encryptedSubStrings = perform(subStrings, invertedKeyMatrix);
+
+        String result = String.join("", encryptedSubStrings);
+        return result;
+    }
+
+    public String encrypt(String text){
+        String[] subStrings = devide(text);
+        String[] decryptedSubStrings = perform(subStrings, keyMatrix);
+
+        String result = String.join("", decryptedSubStrings);
+        return result;
+    }
+
+    public String[] devide(String s){
+        StringBuilder stringBuilder = new StringBuilder(s);
+        int KeyMatrixlength = keyMatrix.length;
+
+        //Обраховуємо скільки символів необхідно добавити
+        int amountOfWhiteSpaceToAdd = (s.length() % KeyMatrixlength == 0)?(0):(KeyMatrixlength - s.length() % KeyMatrixlength);
+
+        //Доповнюємо стрічку пробліами щоб розділити її на рівні стрічки
+        stringBuilder.append(String.join("", Collections.nCopies(amountOfWhiteSpaceToAdd, " ")));
+
+        //Саме розбиваємо на підстрічки
+        String[] result = new String[stringBuilder.length()/KeyMatrixlength];
+        for (int i = 0, j = 0; j < stringBuilder.length(); i++, j+=KeyMatrixlength){
+            result[i] = stringBuilder.substring(j, j+KeyMatrixlength);
+        }
+
+        return result;
+    }
+
+    public int[][] keyToMatrix(String key, int len) {
+        int[][] keyMatrix = new int[len][len];
+        int c = 0;
+        for (int i = 0; i < len; i++)
+        {
+            for (int j = 0; j < len; j++)
+            {
+                keyMatrix[i][j] = (alphabet.indexOf(key.charAt(c)));
+                c++;
+            }
+        }
+        return keyMatrix;
+    }
+
+    public int determinant(int A[][], int N){
         int res;
         if (N == 1)
             res = A[0][0];
@@ -194,31 +243,35 @@ public class HillContoller {
         return stringBuilder.toString();
     }
 
-    public void showError(String message){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText(message);
-        alert.showAndWait();
+    public String[] perform(String subStrings[], int[][] keyMatrix){
+        int[] matrix;
+        int[] multiplyKey;
+        String[] result = new String[subStrings.length];
+        int i =0;
+
+        for (String temp: subStrings){
+            System.out.println("Sub: " + temp);
+            matrix = lineToMatrix(temp);
+            System.out.println("Matrix: " + Arrays.toString(matrix));
+            multiplyKey= lineMultiplyKey(matrix, keyMatrix);
+            System.out.println("MultiplyKEy: " + Arrays.toString(multiplyKey));
+            result[i] = indexesToSymbols(multiplyKey);
+            System.out.println("result: " + (result[i]));
+            i++;
+        }
+        return result;
     }
 
-    public String perform(String temp)
-    {
-        int[] matrix = lineToMatrix(temp);
-        int[] multiplyKey= lineMultiplyKey(matrix);
-        return result(multiplyKey);
-    }
-
-    public int[] lineToMatrix(String line)
-    {
+    public int[] lineToMatrix(String line){
         int[] lineMatrix = new int[line.length()];
         for (int i = 0; i < line.length(); i++)
         {
-            lineMatrix[i] = ((int) line.charAt(i)) - 97;
+            lineMatrix[i] = alphabet.indexOf(line.charAt(i));
         }
         return lineMatrix;
     }
 
-    public int[] lineMultiplyKey(int[] text)
-    {
+    public int[] lineMultiplyKey(int[] text, int[][] keyMatrix) {
         int[] resultMatrix = new int[text.length];
         for (int i = 0; i < text.length; i++)
         {
@@ -231,115 +284,85 @@ public class HillContoller {
         return resultMatrix;
     }
 
-    public String result(int[] resultmatrix)
-    {
+    public String indexesToSymbols(int[] resultMatrix){
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < resultmatrix.length; i++)
+        for (int i = 0; i < resultMatrix.length; i++)
         {
-            result.append((char) (resultmatrix[i] + 97));
+            result.append(alphabet.charAt(resultMatrix[i]));
         }
         return result.toString();
     }
 
-    public void cofact(int num[][], int f)
-    {
-        int b[][], fac[][];
-        b = new int[f][f];
-        fac = new int[f][f];
-        int p, q, m, n, i, j;
-        for (q = 0; q < f; q++)
+    public int[][] calcInvertedMatrix(int[][] matrix){
+        int x = findXO(determinant(matrix, matrix.length));
+        int[][] result = FinMinor(Minor(matrix), x);
+        return  result;
+    }
+
+    public int[][] Minor(int[][] matrix){
+        int[][] matrMinor = new int[matrix.length][matrix.length];
+
+        matrMinor[0][0] = matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1];
+        matrMinor[0][1] = -(matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]);
+        matrMinor[0][2] = matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0];
+        matrMinor[1][0] = -(matrix[0][1] * matrix[2][2] - matrix[0][2] * matrix[2][1]);
+        matrMinor[1][1] = matrix[0][0] * matrix[2][2] - matrix[0][2] * matrix[2][0];
+        matrMinor[1][2] = -(matrix[0][0] * matrix[2][1] - matrix[0][1] * matrix[2][0]);
+        matrMinor[2][0] = matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1];
+        matrMinor[2][1] = -(matrix[0][0] * matrix[1][2] - matrix[0][2] * matrix[1][0]);
+        matrMinor[2][2] = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+
+        if (determinant(matrix, matrix.length) < 0) {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix.length; j++) {
+                    matrMinor[i][j] *= -1;
+                }
+            }
+        }
+        System.out.println(Arrays.deepToString(matrMinor));
+        return matrMinor;
+    }
+
+    public int findXO(int det) {
+        int num = 0;
+        for (int index = 2; index < alphabet.length(); ++index)
         {
-            for (p = 0; p < f; p++)
+            System.out.println(index * det % alphabet.length());
+            if (Math.abs(index * det % alphabet.length()) == 1)
             {
-                m = 0;
-                n = 0;
-                for (i = 0; i < f; i++)
-                {
-                    for (j = 0; j < f; j++)
-                    {
-                        b[i][j] = 0;
-                        if (i != q && j != p)
-                        {
-                            b[m][n] = num[i][j];
-                            if (n < (f - 2))
-                                n++;
-                            else
-                            {
-                                n = 0;
-                                m++;
-                            }
-                        }
+                num = index;
+                System.out.println(num);
+                break;
+            }
+        }
+
+        return num;
+    }
+
+    public int[][] FinMinor(int[][] minor, int x) {
+        int[][] finMinor = new int[minor.length][minor.length];
+
+        for (int i = 0; i < minor.length; i++) {
+            for (int j = 0; j < minor.length; j++) {
+                finMinor[i][j] = minor[j][i];
+            }
+        }
+
+        for (int i = 0; i < minor.length; i++) {
+            for (int j = 0; j < minor.length; j++) {
+                if (finMinor[i][j] < 0) {
+                    while (finMinor[i][j] < 0) {
+                        finMinor[i][j] += alphabet.length();
+                    }
+                } else if (finMinor[i][j] > alphabet.length()) {
+                    while (finMinor[i][j] > alphabet.length()) {
+                        finMinor[i][j] -= alphabet.length();
                     }
                 }
-                fac[q][p] = (int) Math.pow(-1, q + p) * determinant(b, f - 1);
+                finMinor[i][j] *= x;
+                finMinor[i][j] = finMinor[i][j] % alphabet.length();
             }
         }
-        trans(fac, f);
-    }
-
-    void trans(int fac[][], int r)
-    {
-        int i, j;
-        int b[][], inv[][];
-        b = new int[r][r];
-        inv = new int[r][r];
-        int d = determinant(keyMatrix, r);
-        int mi = mi(d % 26);
-        mi %= 26;
-        if (mi < 0)
-            mi += 26;
-        for (i = 0; i < r; i++)
-        {
-            for (j = 0; j < r; j++)
-            {
-                b[i][j] = fac[j][i];
-            }
-        }
-        for (i = 0; i < r; i++)
-        {
-            for (j = 0; j < r; j++)
-            {
-                inv[i][j] = b[i][j] % 26;
-                if (inv[i][j] < 0)
-                    inv[i][j] += 26;
-                inv[i][j] *= mi;
-                inv[i][j] %= 26;
-            }
-        }
-        System.out.println("\nInverse key:");
-        matrixToInvKey(inv, r);
-    }
-
-    public int mi(int d)
-    {
-        int q, r1, r2, r, t1, t2, t;
-        r1 = 26;
-        r2 = d;
-        t1 = 0;
-        t2 = 1;
-        while (r1 != 1 && r2 != 0)
-        {
-            q = r1 / r2;
-            r = r1 % r2;
-            t = t1 - (t2 * q);
-            r1 = r2;
-            r2 = r;
-            t1 = t2;
-            t2 = t;
-        }
-        return (t1 + t2);
-    }
-
-    public void matrixToInvKey(int inv[][], int n)
-    {
-        String invkey = "";
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                invkey += (char) (inv[i][j] + 97);
-            }
-        }
-        System.out.print(invkey);
+        return finMinor;
     }
 }

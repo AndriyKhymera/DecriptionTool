@@ -63,9 +63,8 @@ public class GraphicsWindowController implements Initializable{
 
         String key;
 
-        System.out.println("Size1: " + decryptedTextKeys.size());
-        System.out.println("Size2: " + encryptedTextKeys.size());;
-        for (int i = 0; i < decryptedTextKeys.size(); i++){
+        int size = (decryptedTextKeys.size() >= encryptedTextKeys.size()) ? encryptedTextKeys.size() : decryptedTextKeys.size();
+        for (int i = 0; i < size; i++){
             key = decryptedTextKeys.get(i) + " (" + encryptedTextKeys.get(i) + ")";
             keys.add(i, key);
 

@@ -9,7 +9,7 @@
   <children>
     <TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="824.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
-        <Tab text="Статистичний аналіз">
+        <Tab text="Аналіз">
           <content>
             <fx:include prefHeight="460.0" prefWidth="824.0" source="StatisticTab.fxml" />
           </content>
@@ -32,6 +32,21 @@
             <Tab text="Шифр Хілла">
                <content>
                   <fx:include source="HillTab.fxml" />
+               </content>
+            </Tab>
+            <Tab text="Шифр Фейстеля">
+               <content>
+                  <fx:include source="FeistelTab.fxml" />
+               </content>
+            </Tab>
+            <Tab text="RSA">
+               <content>
+                  <fx:include source="RSATab.fxml" />
+               </content>
+            </Tab>
+            <Tab text="DES">
+               <content>
+                  <fx:include source="DES.fxml" />
                </content>
             </Tab>
       </tabs>
