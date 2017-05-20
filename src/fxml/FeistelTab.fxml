@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FeistelController">
+   <children>
+      <TextArea fx:id="tab6_inputTextArea" layoutX="50.0" layoutY="93.0" prefHeight="144.0" prefWidth="431.0" wrapText="true" />
+      <TextArea fx:id="tab6_outputTextArea" layoutX="50.0" layoutY="282.0" prefHeight="144.0" prefWidth="431.0" wrapText="true" />
+      <TextArea fx:id="calculationTextArea" layoutX="521.0" layoutY="93.0" prefHeight="333.0" prefWidth="271.0" wrapText="true" />
+      <Label layoutX="47.0" layoutY="257.0" text="Вихідний текст" />
+      <Label layoutX="51.0" layoutY="59.0" text="Вхідний текст" />
+      <Label layoutX="51.0" layoutY="22.0" text="Кількість раундів" />
+      <Label layoutX="260.0" layoutY="22.0" text="Ko" />
+      <TextField fx:id="roundsAmountTextField" layoutX="183.0" layoutY="17.0" prefHeight="26.0" prefWidth="37.0" />
+      <TextField fx:id="k0_TextField" layoutX="284.0" layoutY="17.0" prefHeight="26.0" prefWidth="37.0" />
+      <Label layoutX="387.0" layoutY="22.0" text="Напрямок зміни K:" />
+      <Label layoutX="530.0" layoutY="59.0" text="Обчислення" />
+      <Button fx:id="encryptButton" layoutX="225.0" layoutY="54.0" mnemonicParsing="false" onAction="#encryptButtonHandler" text="Зашифрувати" />
+      <Button fx:id="decryptButton" layoutX="361.0" layoutY="54.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
+      <RadioButton fx:id="increaseRadioButton" layoutX="520.0" layoutY="21.0" mnemonicParsing="false" text="За зростанням" />
+      <RadioButton layoutX="652.0" layoutY="21.0" mnemonicParsing="false" text="За спаданням" />
+      <Button fx:id="lineChartsButton" layoutX="652.0" layoutY="54.0" mnemonicParsing="false" onAction="#lineChartsButtonHandler" text="Графіки" />
+   </children>
+</AnchorPane>

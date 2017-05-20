@@ -9,7 +9,7 @@
   <children>
     <TabPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="824.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <tabs>
-        <Tab text="Аналіз">
+        <Tab text="Статистичний аналіз">
           <content>
             <fx:include prefHeight="460.0" prefWidth="824.0" source="StatisticTab.fxml" />
           </content>
