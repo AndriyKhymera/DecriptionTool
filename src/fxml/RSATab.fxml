@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RSAConroller">
+   <children>
+      <Label layoutX="540.0" layoutY="69.0" text="Обчислення" />
+      <TextField fx:id="q_TextField" layoutX="438.0" layoutY="26.0" prefHeight="25.0" prefWidth="38.0" />
+      <TextField fx:id="p_TextField" layoutX="366.0" layoutY="26.0" prefHeight="25.0" prefWidth="38.0" />
+      <Label layoutX="417.0" layoutY="31.0" text="Q" />
+      <Label layoutX="348.0" layoutY="31.0" text="P" />
+      <Label layoutX="61.0" layoutY="69.0" text="Вхідний текст" />
+      <Label layoutX="57.0" layoutY="267.0" text="Вихідний текст" />
+      <TextArea fx:id="calculationTextArea" layoutX="531.0" layoutY="103.0" prefHeight="333.0" prefWidth="271.0" wrapText="true" />
+      <TextArea fx:id="tab7_outputTextArea" layoutX="60.0" layoutY="292.0" prefHeight="144.0" prefWidth="431.0" wrapText="true" />
+      <TextArea fx:id="tab7_inputTextArea" layoutX="60.0" layoutY="103.0" prefHeight="144.0" prefWidth="431.0" wrapText="true" />
+      <Button layoutX="371.0" layoutY="64.0" mnemonicParsing="false" onAction="#encryptButtonHandler" text="Зашифрувати" />
+      <Button layoutX="237.0" layoutY="64.0" mnemonicParsing="false" onAction="#decryptButtonHandler" text="Розшифрувати" />
+      <Button fx:id="lineChartsButton" layoutX="645.0" layoutY="64.0" mnemonicParsing="false" onAction="#lineChartsButtonHandler" text="Графіки" />
+   </children>
+</AnchorPane>
