@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HillContoller">
+    <children>
+        <SplitPane dividerPositions="0.5" layoutY="139.0" prefHeight="261.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TextArea fx:id="tab5_inputTextArea" layoutX="69.0" prefHeight="320.0" prefWidth="407.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TextArea fx:id="tab5_outputTextArea" layoutX="111.0" layoutY="60.0" prefHeight="320.0" prefWidth="407.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </children></AnchorPane>
+            </items>
+        </SplitPane>
+        <Label layoutX="141.0" layoutY="64.0" prefHeight="15.0" prefWidth="39.0" text="Ключ" />
+        <TextField fx:id="tab5_keyTextField" layoutX="207.0" layoutY="59.0" />
+        <Button fx:id="tab5_checkTheKeyButton" layoutX="426.0" layoutY="59.0" mnemonicParsing="false" onAction="#checkTheKeyButtonHandler" text="Перевірити ключ" />
+        <Button fx:id="tab5_encryptButton" layoutX="619.0" layoutY="41.0" mnemonicParsing="false" onAction="#encryptButtonHandler" prefHeight="25.0" prefWidth="122.0" text="Зашифрувати" />
+        <Button fx:id="tab5_decryptButton" layoutX="619.0" layoutY="77.0" mnemonicParsing="false" onAction="#decryptButtonHandler" prefHeight="25.0" prefWidth="122.0" text="Розшифрувати" />
+        <Button fx:id="lineChartsButton" layoutX="40.0" layoutY="59.0" mnemonicParsing="false" onAction="#lineChartsButtonHandler" text="Графіки" />
+    </children>
+</AnchorPane>
